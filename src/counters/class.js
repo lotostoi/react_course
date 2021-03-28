@@ -1,25 +1,44 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export default class extends React.Component{
-    // this.props
+export default class extends React.Component {
+
+
+    static propTypes = {
+        min: PropTypes.number.isRequired,
+        max: PropTypes.number.isRequired,
+        cnt: PropTypes.number.isRequired
+    }
 
     state = {
-        cnt: 0
+        inputValid: this.props.min
     };
+
 
     increase = () => {
         this.setState({
-            cnt: this.state.cnt + 1
-        });
+            inputValid: this.inputValid + 1
+        })
+    }
+    decrease = () => {
+        this.setState({
+            inputValid: this.inputValid - 1
+        })
     }
 
-    render(){
+    change = (e) => {
+
+    }
+
+    render() {
         return (
             <div>
-                <strong>{this.state.cnt}</strong>
-                <br/>
-                <button onClick={this.increase}>Plus 1</button>
+                <div>
+                    <button onClick={this.decrease} >-</button>
+                    <input type='text' value={this.props.cnt} onChange={this.change} /*onBlur={connect} */ />
+                    <button onClick={this.increase}>+</button>
+                </div>
             </div>
-        );
+        )
     }
 }
