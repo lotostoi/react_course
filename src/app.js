@@ -1,7 +1,7 @@
 import React from 'react'
-import Valid from './counters/class.js'
+
 import MyInput from './counters/compInput'
-//import Valid from './counters/function.js'
+
 
 export default class extends React.Component {
   state = {
