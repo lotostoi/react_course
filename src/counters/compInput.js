@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default class extends React.Component {
-    static PropTypes = {
+    static propTypes = {
         min: PropTypes.number.isRequired,
         max: PropTypes.number.isRequired,
         onChange: PropTypes.func,
@@ -16,6 +16,8 @@ export default class extends React.Component {
     }
 
     setCnt(value, cb = null) {
+
+    
 
         let newValue = parseInt(value)
         if (!isNaN(newValue)) {

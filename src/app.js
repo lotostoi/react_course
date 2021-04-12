@@ -1,7 +1,7 @@
 import React from 'react'
 
-import MyInput from './counters/compInput'
-
+import MyInput from './counters/compInputRef'
+import MyInputWithHook from './counters/compInputHook'
 
 export default class extends React.Component {
   state = {
@@ -11,59 +11,64 @@ export default class extends React.Component {
         title: 'Sumsung 10',
         price: 2000,
         amount: 1,
-        rest: 20
+        rest: 20,
       },
       {
         id: 2,
         title: 'Apple 10',
         price: 4000,
         amount: 1,
-        rest: 10
+        rest: 10,
       },
       {
         id: 3,
         title: 'Nokia 10',
         price: 1000,
         amount: 1,
-        rest: 5
+        rest: 5,
       },
       {
         id: 4,
         title: 'Sony 10',
         price: 7000,
         amount: 1,
-        rest: 4
-      }
+        rest: 4,
+      },
     ],
-    totalSumm: 0
+    totalSumm: 0,
   }
 
   changeProducts(e, _id) {
     const newProducts = [...this.state.products]
-    const newProd = {...(newProducts.find(({id}) => +id === +_id) || {})}
+    const newProd = { ...(newProducts.find(({ id }) => +id === +_id) || {}) }
     if ('id' in newProd) {
       newProd.amount = e
-      const idx = newProducts.findIndex(({id}) => +id === +newProd.id)
+      const idx = newProducts.findIndex(({ id }) => +id === +newProd.id)
       newProducts[idx] = newProd
-      this.setState({products: newProducts})
+      this.setState({ products: newProducts })
     }
   }
 
   delProd(_id) {
     const newProducts = [...this.state.products]
-    this.setState({products: newProducts.filter(({id}) => +id !== _id)})
+    this.setState({ products: newProducts.filter(({ id }) => +id !== _id) })
   }
 
   render() {
     const totalSumm = this.state.products.reduce((start, prod) => start + prod.amount * prod.price, 0)
-    const productsList = this.state.products.map(prod => {
+    const productsList = this.state.products.map((prod) => {
       return (
-        <tr key={prod.id}>
+        <tr key={prod.id + prod.amount + Math.random()}>
           <td>{prod.id}</td>
           <td>{prod.title}</td>
           <td>{prod.price}</td>
           <td>
-            <MyInput min={1} max={prod.rest} value={prod.amount} onChange={e => this.changeProducts(e, prod.id)} />
+            <MyInputWithHook
+              min={1}
+              max={prod.rest}
+              value={prod.amount}
+              onChange={(e) => this.changeProducts(e, prod.id)}
+            />
           </td>
           <td>{prod.price * prod.amount}</td>
           <td>
@@ -74,6 +79,7 @@ export default class extends React.Component {
     })
     return (
       <div>
+        <MyInput value={2} max = {30} min={-5} onChange={(e) => console.log(e)}></MyInput>
         <table>
           <tbody>
             <tr>
@@ -89,6 +95,7 @@ export default class extends React.Component {
         <div>
           <span>Общая сумма: {totalSumm}</span>
         </div>
+        <button onClick={() => this.changeProducts(3, 3)}>test</button>
       </div>
     )
   }
