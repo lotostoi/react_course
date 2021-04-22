@@ -5,8 +5,7 @@ import AppInput from './inputWithRef'
 export default class extends React.Component {
   constructor(props) {
     super(props)
-    this.myRef = React.createRef()
-    console.log(this.props.value);
+    this.myNewRef = React.createRef()
   }
 
   static propTypes = {
@@ -17,27 +16,14 @@ export default class extends React.Component {
     value: PropTypes.number.isRequired,
   }
 
-
-
-  setCnt(value, cb = null) {
+  setCnt(value) {
     let newValue = parseInt(value)
     if (!isNaN(newValue)) {
       newValue = Math.min(this.props.max, Math.max(this.props.min, newValue))
     } else {
       newValue = this.props.min
     }
-    this.myRef.current.value = this.props.value
-    if (typeof cb === 'function') {
-      cb(newValue)
-    }
-  }
-
-
-
-  onChange(e) {
-    this.setCnt(e, (e) => {
-      this.props.onChange(e)
-    })
+    return newValue
   }
 
   increase = () => {
@@ -48,7 +34,16 @@ export default class extends React.Component {
     this.setCnt(this.state.cnt - 1, this.props.onChange)
   }
 
+  onChange(e) {
+    console.log('eeeeeeeeeeeeeeee');
+    this.myNewRef.current.value = this.setCnt(e)
+    console.log(this.myNewRef);
+    this.props.onChange(this.myNewRef.current.value)
+  }
+
+
+
   render() {
-    return <AppInput defaultValue={this.props.value} onChange={(e) => this.onChange(e)} ref={this.myRef} />
+    return <AppInput value={this.props.value} onChange={(e) => this.onChange(e)} ref={this.myNewRef} />
   }
 }

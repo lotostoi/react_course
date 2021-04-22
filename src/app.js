@@ -79,7 +79,7 @@ export default class extends React.Component {
     })
     return (
       <div>
-        <MyInput value={2} max = {30} min={-5} onChange={(e) => console.log(e)}></MyInput>
+        <MyInput value={7} max = {30} min={-5} onChange={(e) => console.log(e,'test')}></MyInput>
         <table>
           <tbody>
             <tr>

@@ -19,15 +19,27 @@ export default class extends React.Component {
     value: PropTypes.number,
     onChange: PropTypes.func,
   }
+  setCnt(value) {
+    let newValue = parseInt(value)
+    if (!isNaN(newValue)) {
+      newValue = Math.min(this.props.max, Math.max(this.props.min, newValue))
+    } else {
+      newValue = this.props.min
+    }
+    return newValue
+  }
 
-  state = {
-    cnt: this.props.value,
-    value: this.props.value,
+  increase = () => {
+    this.setCnt(this.state.cnt + 1)
+  }
+
+  decrease = () => {
+    this.setCnt(this.state.cnt - 1)
   }
 
   onChange(e) {
     this.props.onChange(e.target.value)
-    this.myRef.current.value = this.props.value
+    this.myRef.current.value = e.target.value
   }
 
   render() {
