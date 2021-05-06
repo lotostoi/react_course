@@ -1,7 +1,7 @@
 import React from 'react'
 
 import MyInput from './counters/compInputRef'
-import MyInputWithHook from './counters/compInputHook'
+
 
 export default class extends React.Component {
   state = {
@@ -58,12 +58,12 @@ export default class extends React.Component {
     const totalSumm = this.state.products.reduce((start, prod) => start + prod.amount * prod.price, 0)
     const productsList = this.state.products.map((prod) => {
       return (
-        <tr key={prod.id + prod.amount + Math.random()}>
+        <tr key={prod.id }>
           <td>{prod.id}</td>
           <td>{prod.title}</td>
           <td>{prod.price}</td>
           <td>
-            <MyInputWithHook
+            <MyInput
               min={1}
               max={prod.rest}
               value={prod.amount}
@@ -78,9 +78,8 @@ export default class extends React.Component {
       )
     })
     return (
-      <div>
-        <MyInput value={7} max = {30} min={-5} onChange={(e) => console.log(e,'test')}></MyInput>
-        <table>
+      <div className="container">
+        <table className="table table-bordered">
           <tbody>
             <tr>
               <td>id</td>

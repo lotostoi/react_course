@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+
 // input based on hooks
 
 export default class extends React.Component {
@@ -11,7 +12,7 @@ export default class extends React.Component {
 
   static defaultProps = {
     value: 0,
-    onChange: function () {},
+    onChange: function () { },
   }
 
   static propTypes = {
@@ -19,27 +20,17 @@ export default class extends React.Component {
     value: PropTypes.number,
     onChange: PropTypes.func,
   }
-  setCnt(value) {
-    let newValue = parseInt(value)
-    if (!isNaN(newValue)) {
-      newValue = Math.min(this.props.max, Math.max(this.props.min, newValue))
-    } else {
-      newValue = this.props.min
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.value !== this.props.value || this.myRef.current.value != this.props.value) {
+      this.myRef.current.value = this.props.value
     }
-    return newValue
   }
 
-  increase = () => {
-    this.setCnt(this.state.cnt + 1)
-  }
-
-  decrease = () => {
-    this.setCnt(this.state.cnt - 1)
-  }
 
   onChange(e) {
-    this.props.onChange(e.target.value)
-    this.myRef.current.value = e.target.value
+    if (e.target.value === this.props.value.toString()) return
+    this.props.onChange(e)
   }
 
   render() {
