@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import AppInput from './inputWithRef'
-import style from "./style.modules.scss"
+import style from './style.module.scss'
 
 export default class extends React.Component {
 
@@ -20,10 +20,12 @@ export default class extends React.Component {
   }
 
   increase = () => {
+    console.log('inc');
     this.setCnt(this.props.value + 1)
   }
 
   decrease = () => {
+    console.log('dec');
     this.setCnt(this.props.value - 1)
   }
 
@@ -39,8 +41,7 @@ export default class extends React.Component {
         <button onClick={this.decrease}>-</button>
         <AppInput value={this.props.value}
           onChange={(e) => this.onChange(e)}
-          ref={this.myNewRef}
-          appDefaultProps={{ className: style.input }}
+          appDefaultProps={{ className: style.input, type: 'text' }}
         />
         <button onClick={this.increase}>+</button>
       </div>

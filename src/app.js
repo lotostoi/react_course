@@ -1,6 +1,8 @@
 import React from 'react'
 
-import MyInput from './counters/compInputRef'
+import MyInput from '@/components/counters/compInputRef'
+import Cart from "@/components/cart/cart"
+
 
 
 export default class extends React.Component {
@@ -12,6 +14,7 @@ export default class extends React.Component {
         price: 2000,
         amount: 1,
         rest: 20,
+        img: "https://via.placeholder.com/150",
       },
       {
         id: 2,
@@ -19,6 +22,7 @@ export default class extends React.Component {
         price: 4000,
         amount: 1,
         rest: 10,
+        img: "https://via.placeholder.com/150",
       },
       {
         id: 3,
@@ -26,6 +30,7 @@ export default class extends React.Component {
         price: 1000,
         amount: 1,
         rest: 5,
+        img: "https://via.placeholder.com/150"
       },
       {
         id: 4,
@@ -33,19 +38,21 @@ export default class extends React.Component {
         price: 7000,
         amount: 1,
         rest: 4,
+        img: "https://via.placeholder.com/150"
       },
     ],
     totalSumm: 0,
   }
 
   changeProducts(e, _id) {
+    console.log(e);
     const newProducts = [...this.state.products]
     const newProd = { ...(newProducts.find(({ id }) => +id === +_id) || {}) }
     if ('id' in newProd) {
       newProd.amount = e
       const idx = newProducts.findIndex(({ id }) => +id === +newProd.id)
       newProducts[idx] = newProd
-      this.setState({ products: newProducts })
+      this.setState({ products: newProducts }, () => console.log(this.state.products))
     }
   }
 
@@ -58,7 +65,7 @@ export default class extends React.Component {
     const totalSumm = this.state.products.reduce((start, prod) => start + prod.amount * prod.price, 0)
     const productsList = this.state.products.map((prod) => {
       return (
-        <tr key={prod.id }>
+        <tr key={prod.id}>
           <td>{prod.id}</td>
           <td>{prod.title}</td>
           <td>{prod.price}</td>
@@ -79,22 +86,7 @@ export default class extends React.Component {
     })
     return (
       <div className="container">
-        <table className="table table-bordered">
-          <tbody>
-            <tr>
-              <td>id</td>
-              <td>title</td>
-              <td>price</td>
-              <td>amount</td>
-              <td>total</td>
-            </tr>
-            {productsList}
-          </tbody>
-        </table>
-        <div>
-          <span>Общая сумма: {totalSumm}</span>
-        </div>
-        <button onClick={() => this.changeProducts(3, 3)}>test</button>
+        <Cart items={this.state.products} changeProducts={this.changeProducts.bind(this)} />
       </div>
     )
   }

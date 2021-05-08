@@ -11,10 +11,18 @@ let conf = {
     filename: "main.js",
     publicPath: "/",
   },
+  resolve: {
+    extensions: ['.js', '.scss', '.css', '.json', '.img', '.png', '.jsx'],
+    alias: {
+      vue: 'vue/dist/vue.js',
+      '~': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -55,7 +63,7 @@ let conf = {
         ],
       },
       {
-        test: /.css$/i,
+        test: /\.css$/i,
         use: [
           {
             loader: process.env.NODE_ENV !== "development" ? MiniCssExtractPlugin.loader : "style-loader",
@@ -70,7 +78,7 @@ let conf = {
     contentBase: path.join(__dirname, "dist"),
     overlay: true,
   },
-  
+
   plugins: [
     new CleanWebpackPlugin(),
     new HTML({
