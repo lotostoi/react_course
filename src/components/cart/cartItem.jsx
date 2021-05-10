@@ -1,7 +1,6 @@
 import React from 'react'
-import PropTypes, { object } from 'prop-types'
+import PropTypes from 'prop-types'
 import MyInput from '../counters/compInputRef'
-import isEqual from 'lodash.isequal'
 
 export default class extends React.Component {
     static defaultProps = {

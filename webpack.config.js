@@ -28,7 +28,12 @@ let conf = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"],
-            plugins: ["@babel/plugin-transform-react-jsx", "@babel/plugin-proposal-class-properties"],
+            plugins: [
+              "@babel/plugin-transform-react-jsx",
+              ["@babel/plugin-proposal-decorators", { "legacy": true }],
+              ["@babel/plugin-proposal-private-methods", { "loose": true }],
+              ["@babel/plugin-proposal-class-properties", { "loose": true }]
+            ],
           },
         },
       },
@@ -73,6 +78,8 @@ let conf = {
       },
     ],
   },
+
+  devtool: process.env.NODE_ENV !== "development" ? false : 'eval-cheap-module-source-map',
 
   devServer: {
     contentBase: path.join(__dirname, "dist"),

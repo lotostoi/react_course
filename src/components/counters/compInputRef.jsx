@@ -12,10 +12,12 @@ export default class extends React.Component {
     delProd: PropTypes.func.isRequired,
   };
 
+  input = React.createRef();
+
   setCnt(value) {
     const newValue = Math.min(this.props.max, Math.max(this.props.min, value));
-    console.log(newValue);
     this.props.onChange(newValue);
+    return newValue;
   }
 
   increase = () => {
@@ -28,7 +30,10 @@ export default class extends React.Component {
 
   onChange(e) {
     let newValue = parseInt(e.target.value);
-    this.setCnt(isNaN(newValue) ? this.props.min : newValue);
+    const realValue = this.setCnt(isNaN(newValue) ? this.props.min : newValue);
+    if (realValue !== e.target.velue) {
+      this.input.current.setValue(realValue);
+    }
   }
 
   render() {
@@ -37,7 +42,7 @@ export default class extends React.Component {
         <button className="btn btn-primary  mr-1" onClick={this.decrease}>
           -
         </button>
-        <AppInput value={this.props.value} onChange={(e) => this.onChange(e)} appDefaultProps={{ className: "form-control", type: "text" }} />
+        <AppInput value={this.props.value} onChange={(e) => this.onChange(e)} appDefaultProps={{ className: "form-control", type: "text" }} ref={this.input} />
         <button className="btn btn-primary ml-1" onClick={this.increase}>
           +
         </button>
