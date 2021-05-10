@@ -1,51 +1,64 @@
 import React from 'react'
 
-import MyInput from '@/components/counters/compInputRef'
 import Cart from "@/components/cart/cart"
-
+import Catalog from "@/components/catalog"
+import Orders from "@/components/orders"
+import { products } from "@/store"
 
 
 export default class extends React.Component {
-  state = {
-    products: [
-      {
-        id: 1,
-        title: 'Sumsung 10',
-        price: 2000,
-        amount: 1,
-        rest: 20,
-        img: "https://via.placeholder.com/150",
-      },
-      {
-        id: 2,
-        title: 'Apple 10',
-        price: 4000,
-        amount: 1,
-        rest: 10,
-        img: "https://via.placeholder.com/150",
-      },
-      {
-        id: 3,
-        title: 'Nokia 10',
-        price: 1000,
-        amount: 1,
-        rest: 5,
-        img: "https://via.placeholder.com/150"
-      },
-      {
-        id: 4,
-        title: 'Sony 10',
-        price: 7000,
-        amount: 1,
-        rest: 4,
-        img: "https://via.placeholder.com/150"
-      },
-    ],
-    totalSumm: 0,
+  constructor() {
+    super()
   }
 
-  changeProducts(e, _id) {
-    console.log(e);
+  state = {
+    products: products(),
+    totalSumm: 0,
+    currentRoute: 'cart',
+    formData: {
+      name: {
+        type: 'text',
+        title: 'name',
+        value: '',
+      },
+      email: {
+        type: 'email',
+        title: 'email',
+        value: '',
+      },
+      text: {
+        type: 'text',
+        title: 'message',
+        value: '',
+      },
+    }
+
+  }
+
+  pages = {
+    cart: () => <Cart
+      items={this.state.products}
+      changeProducts={this.changeProducts}
+      delProd={this.delProd}
+      toOrders={this.routeToOrder}
+    />,
+    catalog: () => <Catalog />,
+    orders: () => <Orders formData={this.state.formData} toCart={this.routeToCart} changeFrom={this.changeFrom} />
+  }
+
+  routeToCatalog = () => this.setState({ currentRoute: 'catalog' })
+  routeToCart = () => this.setState({ currentRoute: 'cart' })
+  routeToOrder = () => this.setState({ currentRoute: 'orders' })
+
+  changeFrom = (e, key) => {
+    const form = { ...this.state.formData }
+    form[key].value = e.target.value
+    this.setState({
+      formData: form
+    })
+  }
+
+  changeProducts = (e, _id) => {
     const newProducts = [...this.state.products]
     const newProd = { ...(newProducts.find(({ id }) => +id === +_id) || {}) }
     if ('id' in newProd) {
@@ -56,38 +69,27 @@ export default class extends React.Component {
     }
   }
 
-  delProd(_id) {
+  router = () => {
+    return this.state.currentRoute in this.pages ?
+      this.pages[this.state.currentRoute]() :
+      <div> 404</div>
+  }
+
+  delProd = (_id) => {
     const newProducts = [...this.state.products]
     this.setState({ products: newProducts.filter(({ id }) => +id !== _id) })
   }
 
   render() {
+
     const totalSumm = this.state.products.reduce((start, prod) => start + prod.amount * prod.price, 0)
-    const productsList = this.state.products.map((prod) => {
-      return (
-        <tr key={prod.id}>
-          <td>{prod.id}</td>
-          <td>{prod.title}</td>
-          <td>{prod.price}</td>
-          <td>
-            <MyInput
-              min={1}
-              max={prod.rest}
-              value={prod.amount}
-              onChange={(e) => this.changeProducts(e, prod.id)}
-            />
-          </td>
-          <td>{prod.price * prod.amount}</td>
-          <td>
-            <button onClick={() => this.delProd(prod.id)}>X</button>
-          </td>
-        </tr>
-      )
-    })
+
     return (
       <div className="container">
-        <Cart items={this.state.products} changeProducts={this.changeProducts.bind(this)} />
+        {this.router()}
       </div>
     )
   }
 }
+
+

@@ -1,37 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CartItem from './cartItem'
-import isEqual from 'lodash.isequal'
 import style from "./style.module.scss"
 import ModalWindow from "@/components/modalWindow/modalWindow"
 
 export default class extends React.Component {
     static defaultProps = {
         changeProducts: function () { },
+        delProd: function () { },
+        toOrders: function () { },
     }
 
     static propTypes = {
         items: PropTypes.array.isRequired,
-        changeProducts: PropTypes.func.isRequired
-    }
-
-    state = {
-        cartItems: this.props.items,
-        totalSam: this.props.items.reduce((total, { price, amount }) => total + price * amount, 0)
-    }
-
-    componentDidUpdate(prevProps) {
-        if (!isEqual(prevProps.items, this.props.items)) {
-            this.setState({
-                cartItems: this.props.items,
-                totalSam: this.props.items.reduce((total, { price, amount }) => total + price * amount, 0)
-            })
-        }
+        changeProducts: PropTypes.func.isRequired,
+        toOrders: PropTypes.func.isRequired,
     }
 
     render() {
-        const cartItems = this.state.cartItems.map(item => <CartItem
+        const totalSum = this.props.items.reduce((total, { price, amount }) => total + price * amount, 0)
+        const cartItems = this.props.items.map(item => <CartItem
             changeProducts={this.props.changeProducts}
+            delProd={this.props.delProd}
             cartItem={item}
             style={style}
             key={item.id} />)
@@ -80,11 +70,11 @@ export default class extends React.Component {
                             <button type="submit">Apply coupon</button>
                         </form>
                         <div>
-                            <p>Sub total <span>${this.state.totalSam}</span></p>
-                            <h4>GRAND TOTAL <span>${this.state.totalSam}</span></h4>
+                            <p>Sub total <span>${totalSum}</span></p>
+                            <h4>GRAND TOTAL <span>${totalSum}</span></h4>
                             <div></div>
-                            <ModalWindow className={style.checkout} title={'Proceed to checkout'}/>
-                           
+                            <button onClick={this.props.toOrders} className={style.checkout}>Proceed to checkout</button>
+                            {/* <ModalWindow className={style.checkout} title={'Proceed to checkout'}/>  */}  
                         </div>
                     </div>
                 </div>

@@ -6,48 +6,44 @@ import isEqual from 'lodash.isequal'
 export default class extends React.Component {
     static defaultProps = {
         changeProducts: function () { },
+        delProd: function () { },
     }
 
     static propTypes = {
         cartItem: PropTypes.object.isRequired,
         style: PropTypes.object.isRequired,
-        changeProducts: PropTypes.func.isRequired
+        changeProducts: PropTypes.func.isRequired,
+        delProd: PropTypes.func.isRequired,
     }
 
     state = {
         cartItem: this.props.cartItem
     }
 
-    componentDidUpdate(prevProps) {
-
-        if (!isEqual(prevProps.cartItem, this.props.cartItem)) {
-            this.setState({ cartItem: this.props.cartItem }, () => console.log(this.props.cartItem))
-        }
-    }
-
-
     render() {
         return (
             <tr className={this.props.style.trgood}>
                 <td>
                     <a href="#">
-                        <img src={this.state.cartItem.img} alt="photo" />
+                        <img src={this.props.cartItem.img} alt="photo" />
                     </a>
                     <div className={this.props.style.description}>
-                        <h4>{this.state.cartItem.title}</h4>
+                        <h4>{this.props.cartItem.title}</h4>
                     </div>
                 </td>
-                <td>${this.state.cartItem.price}</td>
+                <td>${this.props.cartItem.price}</td>
                 <td>
-                    <span>{this.state.cartItem.amount}</span>
+                    <span>{this.props.cartItem.amount}</span>
                 </td>
                 <td>FREE</td>
-                <td>${this.state.cartItem.amount * this.state.cartItem.price}</td>
+                <td>${this.props.cartItem.amount * this.state.cartItem.price}</td>
                 <td className={this.props.style.dec} >
                     <MyInput
                         min={1}
-                        max={this.state.cartItem.rest}
-                        value={this.state.cartItem.amount}
+                        max={this.props.cartItem.rest}
+                        delProd={this.props.delProd}
+                        value={this.props.cartItem.amount}
+                        id={this.props.cartItem.id}
                         onChange={(e) => this.props.changeProducts(e, this.state.cartItem.id)} />
                 </td>
             </tr>)

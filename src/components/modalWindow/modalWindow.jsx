@@ -35,7 +35,7 @@ wm.propTypes = {
   title: PropTypes.string.isRequired,
 };
 wm.defaultProps = {
-  title: "test",
+  title: "OK",
 };
 
 export default wm;
