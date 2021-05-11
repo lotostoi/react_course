@@ -1,34 +1,35 @@
-import React from "react";
-import { makeObservable, observable, action, computed } from "mobx";
+import React from 'react'
+import { observable, action, computed, makeObservable } from 'mobx'
 
-import Cart from "@/components/cart/cart";
-import Catalog from "@/components/catalog";
-import Orders from "@/components/orders";
+import Cart from '@/components/cart/cart'
+import Catalog from '@/components/catalog'
+import Orders from '@/components/orders'
+import Result from '@/components/result'
 
 class Router {
   constructor() {
-    makeObservable(this);
+    makeObservable(this, {
+      currentRout: observable,
+      page: computed,
+      toPage: action,
+    })
   }
 
-  @observable currentRout = "cart";
+  currentRout = 'catalog'
 
   pages = {
     cart: () => <Cart />,
     catalog: () => <Catalog />,
     orders: () => <Orders />,
-  };
-
-  @computed
-  get page() {
-    console.log(1);
-    return  this.currentRout in this.pages ?  this.pages[this.currentRout]()  : <div>404</div> ;
+    result: () => <Result />,
   }
-  @action
-  toPage (page) {
-    console.log(1);
-    this.carrentRout = page;
-    console.log( this.carrentRout);
-  };
+
+  get page() {
+    return this.currentRout in this.pages ? this.pages[this.currentRout]() : <div>404</div>
+  }
+  toPage(page) {
+    this.currentRout = page
+  }
 }
 
-export default new Router();
+export default new Router()

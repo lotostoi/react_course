@@ -71,4 +71,3 @@ export default observer (class extends React.Component {
   }
 
 )
-

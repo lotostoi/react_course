@@ -6,9 +6,8 @@ import Router from '@/store/Router'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-import style from '@/components/orders/style.module.scss'
-
 import { observer } from 'mobx-react'
+import loader from 'sass-loader'
 
 export default observer(
   class extends React.Component {
@@ -26,11 +25,12 @@ export default observer(
     }
 
     showError = (show, startValid, text) => {
+      console.log(startValid, 'eee')
       return !show && startValid ? <Form.Text className='text-muted'>{text}</Form.Text> : ''
     }
 
     render() {
-      const bodyForm = []
+     const bodyForm = []
 
       for (const key in ordersStore.formData) {
         if (Object.hasOwnProperty.call(ordersStore.formData, key)) {
@@ -43,9 +43,8 @@ export default observer(
                 placeholder={element.title}
                 onChange={(e) => ordersStore.changeForm(e, key)}
                 value={element.value}
-                className={!element.isValid && element.startValid ? style.error : ''}
               />
-              {this.showError(element.isValid, element.startValid, 'test')}
+             {/*  {this.showError(element.isValid, element.startValid, 'test')} */}
             </Form.Group>
           )
         }
