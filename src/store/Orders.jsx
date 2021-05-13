@@ -45,7 +45,7 @@ class Cart {
   }
 
   get isValid() {
-    return !Object.entries(this.formData).every((el) => el[1].isValid)
+    return !Object.values(this.formData).every((el) => el.isValid)
   }
 
   valid(key) {

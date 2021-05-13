@@ -6,7 +6,7 @@ import Router from "@/store/Router"
 import Cart from "@/store/Cart";
 import { observer } from "mobx-react";
 
-export default observer (class extends React.Component {
+export default observer (class extends React.PureComponent {
 
     render() {
       const totalSum = Cart.cartProducts.reduce((total, { price, amount }) => total + price * amount, 0);
@@ -61,7 +61,6 @@ export default observer (class extends React.Component {
                 <button onClick={()=>Router.toPage('orders')} className={style.checkout}>
                   Proceed to checkout
                 </button>
-                {/* <ModalWindow className={style.checkout} title={'Proceed to checkout'}/>  */}
               </div>
             </div>
           </div>

@@ -19,6 +19,8 @@ export default class extends React.Component {
         cartItem: this.props.cartItem
     }
 
+    chp=(e)=>this.props.changeProducts(e, this.state.cartItem.id)
+
     render() {
         return (
             <tr className={this.props.style.trgood}>
@@ -43,7 +45,7 @@ export default class extends React.Component {
                         delProd={this.props.delProd}
                         value={this.props.cartItem.amount}
                         id={this.props.cartItem.id}
-                        onChange={(e) => this.props.changeProducts(e, this.state.cartItem.id)} />
+                        onChange={this.chp} />
                 </td>
             </tr>)
     }
