@@ -1,11 +1,21 @@
 import React from 'react'
-import Router from '@/store/Router'
 import { observer } from 'mobx-react'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
+
+import { routes } from '@/router'
+import Header from 'c/header'
 
 export default observer(
   class extends React.Component {
     render() {
-      return <div className='container'>{Router.page}</div>
+      return (
+        <Router>
+          <div className='wrapper'>
+            <Header />
+            <Switch>{routes}</Switch>
+          </div>
+        </Router>
+      )
     }
   }
 )

@@ -1,0 +1,15 @@
+@import '@/assets/scss/style';
+.cont-alert {
+  width: 50%;
+  margin: 20px 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  & > span {
+    display: flex;
+    font-size: 20vh;
+    font-weight: 700;
+    color: $pink;
+  }
+}

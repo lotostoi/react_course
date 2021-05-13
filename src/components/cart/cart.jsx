@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CartItem from "./cartItem";
 import style from "./style.module.scss";
-import Router from "@/store/Router"
+//import Router from "@/store/Router"
 import Cart from "@/store/Cart";
 import { observer } from "mobx-react";
 
