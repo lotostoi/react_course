@@ -7,17 +7,17 @@ export default function () {
   return (
     <header className={style.header}>
       <div className={style.header__cont}>
-        <NavLink className={style.header__logo} to={routesMap('home')} activeClassName = {style.active} >
+        <NavLink exact className={style.header__logo} to={routesMap('home')} activeClassName = {style.active} >
           <img src={require('@/assets/img/logo.png')} alt='logo' />
           <p>
             BRSN<span>D</span>
           </p>
         </NavLink>
         <nav className={style.header__nav}>
-          <NavLink to={routesMap('home')} activeClassName = {style.active} >
+          <NavLink exact strict to={routesMap('home')} activeClassName = {style.active} >
             Main
           </NavLink>
-          <NavLink to={routesMap('catalog')} activeClassName = {style.active}  >
+          <NavLink exact strict to={routesMap('catalog')} activeClassName = {style.active}  >
             Catalog
           </NavLink>
         </nav>
@@ -27,7 +27,7 @@ export default function () {
             <i className='fa fa-search' aria-hidden='true'></i>
           </button>
         </div>
-        <NavLink className={style.header__cart + ' ' + style.active} to={routesMap('cart')} activeClassName = {style.active} >
+        <NavLink exact strict className={style.header__cart} to={routesMap('cart')} activeClassName = {style.active} >
           <span>5 pcs.</span>
           <img src={require('@/assets/img/cart.svg')} alt='cart' />
           <span>$5</span>

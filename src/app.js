@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import { routes } from '@/router'
 import Header from 'c/header'
+import Footer from 'c/footer'
 
 export default observer(
   class extends React.Component {
@@ -13,6 +14,7 @@ export default observer(
           <div className='wrapper'>
             <Header />
             <Switch>{routes}</Switch>
+            <Footer/>
           </div>
         </Router>
       )
