@@ -12,6 +12,7 @@ export default class extends React.PureComponent {
     delProd: PropTypes.func.isRequired,
   }
 
+
   input = React.createRef()
 
   setCnt(value) {

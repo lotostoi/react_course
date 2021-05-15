@@ -2,7 +2,7 @@ import React from 'react'
 import style from './error.module.scss'
 import { Link } from 'react-router-dom'
 import { routesMap } from 'r'
-import { routes } from '../../router'
+
 
 export default function () {
   return (

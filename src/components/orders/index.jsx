@@ -1,8 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import Form from 'react-bootstrap/Form'
-import ordersStore from '@/store/Orders'
-//import Router from '@/store/Router'
+import ordersStore from '@/store/orders'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 

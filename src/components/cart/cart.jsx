@@ -1,13 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import CartItem from "./cartItem";
 import style from "./style.module.scss";
-//import Router from "@/store/Router"
-import Cart from "@/store/Cart";
+import Cart from "@/store/cart";
 import { observer } from "mobx-react";
 
-export default observer (class extends React.PureComponent {
-
+export default observer(
+  class extends React.PureComponent {
     render() {
       const totalSum = Cart.cartProducts.reduce((total, { price, amount }) => total + price * amount, 0);
       const cartItems = Cart.cartProducts.map((item) => <CartItem changeProducts={Cart.changeProducts} delProd={Cart.delProd} cartItem={item} style={style} key={item.id} />);
@@ -58,7 +56,7 @@ export default observer (class extends React.PureComponent {
                   GRAND TOTAL <span>${totalSum}</span>
                 </h4>
                 <div></div>
-                <button onClick={()=>Router.toPage('orders')} className={style.checkout}>
+                <button onClick={() => Router.toPage("orders")} className={style.checkout}>
                   Proceed to checkout
                 </button>
               </div>
@@ -68,6 +66,4 @@ export default observer (class extends React.PureComponent {
       );
     }
   }
-
-)
-
+);

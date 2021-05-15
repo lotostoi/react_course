@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 
 import Cart from '@/components/cart/cart'
 import Home from 'p/home'
-import Catalog from '@/components/catalog'
+import Catalog from 'p/catalog'
 import Orders from '@/components/orders'
 import Result from '@/components/result'
 import ErrorPage from 'p/error'

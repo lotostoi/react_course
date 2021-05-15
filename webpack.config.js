@@ -20,6 +20,7 @@ let conf = {
       'p': path.resolve(__dirname, 'src/pages'),
       's': path.resolve(__dirname, 'src/store'),
       'r': path.resolve(__dirname, 'src/router'),
+      'f': path.resolve(__dirname, 'src/functions'),
     },
   },
   module: {
