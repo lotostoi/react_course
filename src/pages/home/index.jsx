@@ -5,6 +5,7 @@ import FeaturesGoods from "c/catalogs/featuresGoods";
 import style from "./home.module.scss";
 
 export default function (props) {
+  window.scrollTo({ top: 120, behavior: "smooth" });
   return (
     <div className={style["home-page"]}>
       <Banner />
