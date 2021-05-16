@@ -1,4 +1,11 @@
 @import '@/assets/scss/style';
+
+.jump {
+  transform: translateY(-20px);
+  color: white;
+  background-color: $pink!important;
+}
+
 .header {
     display: flex;
     width: 100%;
@@ -127,6 +134,7 @@
       text-decoration: none;
       color: $base;
       border: 1px solid rgba(128, 128, 128, 0.144);
+      transition: transform 300ms;
       & > span {
         display: flex;
         margin-left: 5px;

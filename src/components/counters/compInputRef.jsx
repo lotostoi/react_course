@@ -9,7 +9,6 @@ export default class extends React.PureComponent {
     onChange: PropTypes.func,
     onInput: PropTypes.func,
     value: PropTypes.number.isRequired,
-    delProd: PropTypes.func.isRequired,
   }
 
 
@@ -21,14 +20,6 @@ export default class extends React.PureComponent {
     return newValue
   }
 
-  increase = () => {
-    this.setCnt(this.props.value + 1)
-  }
-
-  decrease = () => {
-    this.props.value > 1 ? this.setCnt(this.props.value - 1) : this.props.delProd(this.props.id)
-  }
-
   onChange = (e) => {
     let newValue = parseInt(e.target.value)
     const realValue = this.setCnt(isNaN(newValue) ? this.props.min : newValue)
@@ -38,21 +29,14 @@ export default class extends React.PureComponent {
   }
 
   render() {
-    console.log(11)
     return (
       <>
-        <button className='btn btn-primary  mr-1' onClick={this.decrease}>
-          -
-        </button>
         <AppInput
           value={this.props.value}
           onChange={this.onChange}
           appDefaultProps={{ className: 'form-control', type: 'text' }}
           ref={this.input}
-        />
-        <button className='btn btn-primary ml-1' onClick={this.increase}>
-          +
-        </button>
+        />       
       </>
     )
   }

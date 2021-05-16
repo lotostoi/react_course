@@ -30,7 +30,6 @@ export default observer(
 
     render() {
       const bodyForm = []
-
       for (const key in ordersStore.formData) {
         if (Object.hasOwnProperty.call(ordersStore.formData, key)) {
           const element = ordersStore.formData[key]

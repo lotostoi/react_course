@@ -11,7 +11,6 @@ class Cart {
       changeForm: action,
       valid: action,
     })
-    console.log(Object.entries(this.formData)[0][1].value)
   }
   start = false
   disabled = true

@@ -136,25 +136,33 @@
         & > td:last-of-type {
           width: 150px;
           justify-content: center;
-          & > span {
-            cursor: pointer;
+          flex-direction: column;
+          & > input {
+            padding: 0 20px;
+            height: 40px;
+            margin: 10px;
+            width: 60px;
             display: flex;
-            width: 17px;
-            height: 15px;
-            background-color: #c0c0c0;
-            font-size: 16px;
-            font-weight: 400;
-            text-transform: uppercase;
-            border-radius: 50%;
             justify-content: center;
-            align-items: center;
-            padding-bottom: 2px;
-            &:hover {
-              background-color: $pink;
-            }
-            &:active {
-              background-color: $pinkActive;
-            }
+            box-sizing: border-box;
+          }
+          & > button {
+            min-height: 50px;
+            cursor: pointer;
+            outline: none;
+            border: 2px solid $pink;
+            width: 60px;
+            font-size: 25px;
+            border-radius: 5px;
+            background-color: $pink;
+            color: white;
+          }
+          & > button:hover {
+            background-color: lighten($pink, 20%);
+          }
+
+          & > button:active {
+            transform: scale(0.9);
           }
         }
         & > td.dec {
