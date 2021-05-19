@@ -1,10 +1,10 @@
 import React from "react";
 import { observable, action, computed, makeObservable } from "mobx";
 import { products } from "./data";
-import { getRandom, getRndFromArray } from "f";
+import { getRndFromArray } from "f";
 
 class Catalog {
-  constructor() {
+  constructor(root) {
     makeObservable(this, {
       products: observable,
       getProducts: computed,
@@ -13,6 +13,9 @@ class Catalog {
       changeProducts: action,
       delProd: action,
     });
+
+    this.rootStore = root
+
   }
 
   products = products();
@@ -51,4 +54,4 @@ class Catalog {
   };
 }
 
-export default new Catalog();
+export default Catalog;

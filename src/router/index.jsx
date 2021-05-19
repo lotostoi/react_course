@@ -4,7 +4,6 @@ import Cart from "@/components/cart/cart";
 import Home from "p/home";
 import Catalog from "p/catalog";
 import Orders from "@/components/orders";
-import Result from "@/components/result";
 import ErrorPage from "p/error";
 import SinglePage from "p/singlePage";
 import { CSSTransition } from "react-transition-group";

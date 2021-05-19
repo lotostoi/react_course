@@ -1,14 +1,20 @@
 import React from "react";
 import CartItem from "./cartItem";
 import style from "./style.module.scss";
-import Cart from "@/store/cart";
-import { observer } from "mobx-react";
+import injectObserver from "c/hoc/inject-observ";
 
-export default observer(
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+export default injectObserver(
   class extends React.PureComponent {
     render() {
-      const totalSum = Cart.cartProducts.reduce((total, { price, amount }) => total + price * amount, 0);
-      const cartItems = Cart.cartProducts.map((item) => <CartItem changeProducts={Cart.changeProducts} delProd={Cart.delProd} cartItem={item} style={style} key={item.id} />);
+      const { cart } = this.props.store;
+      const totalSum = cart.cartProducts.reduce((total, { price, amount }) => total + price * amount, 0);
+      const cartItems = cart.cartProducts.map((item) => (
+        <CSSTransition key={item.id} timeout={500} classNames="item">
+          <CartItem changeProducts={cart.changeProducts} addToCart={cart.addToCart} removeFromCart={cart.removeFromCart} cartItem={item} style={style} key={item.id} />
+        </CSSTransition>
+      ));
       return (
         <div className={style.shoppingCart}>
           <div className={style.shoppingCart__cont}>
@@ -22,7 +28,7 @@ export default observer(
                   <td>Subtotal</td>
                   <td>ACTION</td>
                 </tr>
-                {cartItems}
+                <TransitionGroup component={null}>{cartItems}</TransitionGroup>
               </tbody>
             </table>
             <div className={style.shoppingCart__buttons}>

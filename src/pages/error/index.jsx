@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { error } from "r";
 
 export default function () {
-  console.log(useLocation());
   return error(useLocation().pathname) ? (
     <div className={style["container-error"]}>
       <Error />

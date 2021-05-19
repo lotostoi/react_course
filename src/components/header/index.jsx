@@ -2,13 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import style from "./header.module.scss";
 import { routesMap } from "r";
-import cartModule from "s/cart";
-import { observer } from "mobx-react";
 import { reaction } from "mobx";
-import { set } from "lodash";
+
+import store from "s/rootStore"
+import injectObserver from "c/hoc/inject-observ";
 
 reaction(
-  () => cartModule.totalSum,
+  () => store.cart.totalSum,
   (val, prevVal, reaction) => {
     const cart = document.querySelector(`.${style.header__cart}`);
     cart.classList.add(`${style.jump}`);
@@ -16,7 +16,7 @@ reaction(
   }
 );
 
-export default observer(function () {
+export default injectObserver(({ store }) => {
   return (
     <header className={style.header}>
       <div className={style.header__cont}>
@@ -41,9 +41,9 @@ export default observer(function () {
           </button>
         </div>
         <NavLink exact strict className={style.header__cart} to={routesMap("cart")} activeClassName={style.active}>
-          <span>{cartModule.totalAmount} pcs.</span>
+          <span>{store.cart.totalAmount} pcs.</span>
           <img src={require("@/assets/img/cart.svg")} alt="cart" />
-          <span>${cartModule.totalSum}</span>
+          <span>${store.cart.totalSum}</span>
         </NavLink>
       </div>
     </header>

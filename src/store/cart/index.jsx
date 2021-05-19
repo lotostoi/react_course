@@ -1,12 +1,8 @@
 import React from "react";
 import { observable, action, computed, makeObservable, reaction } from "mobx";
 
-
-
-
-
 class Cart {
-  constructor() {
+  constructor(root) {
     makeObservable(this, {
       cartProducts: observable,
       getProducts: computed,
@@ -17,6 +13,8 @@ class Cart {
       addToCart: action,
       removeFromCart: action,
     });
+
+    this.rootStore = root;
   }
 
   cartProducts = [];
@@ -28,7 +26,7 @@ class Cart {
     return this.cartProducts.reduce((t, { price, amount }) => t + price * amount, 0);
   }
   get totalAmount() {
-    return this.cartProducts.reduce((t, {  amount }) => t + amount, 0);
+    return this.cartProducts.reduce((t, { amount }) => t + amount, 0);
   }
 
   changeProducts = (e, _id) => {
@@ -50,11 +48,6 @@ class Cart {
   delProd = (_id) => {
     this.cartProducts = this.cartProducts.filter(({ id }) => +id !== _id);
   };
- 
 }
 
-let cart = new Cart()
-
-
-
-export default cart;
+export default Cart;

@@ -11,7 +11,7 @@ function good(props) {
       <div className={style.img}>
         <img src={typeof props.good.img === "string" ? props.good.img : props.good.img[0]} width="261" height="279" alt="good" />
         <div className={style.contCart}>
-          <button className={style.cart} onClick={() => catrModule.addToCart(props.good)}>
+          <button className={style.cart} onClick={() => props.addToCart(props.good)}>
             <img src={require("@/assets/img/cart_white.png")} width="23" height="22" alt="cart" />
             <span>Add to Cart</span>
           </button>

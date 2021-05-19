@@ -6,16 +6,14 @@ import { observer } from "mobx-react";
 
 export default observer(
   class extends React.Component {
-    static defaultProps = {
-      changeProducts: function () {},
-      delProd: function () {},
-    };
+  
 
     static propTypes = {
       cartItem: PropTypes.object.isRequired,
       style: PropTypes.object.isRequired,
       changeProducts: PropTypes.func.isRequired,
-      delProd: PropTypes.func.isRequired,
+      addToCart: PropTypes.func.isRequired,
+      removeFromCart: PropTypes.func.isRequired,
     };
 
     state = {
@@ -42,9 +40,9 @@ export default observer(
           <td>FREE</td>
           <td>${this.props.cartItem.amount * this.state.cartItem.price}</td>
           <td className={this.props.style.dec}>
-            <button onClick={() => cartModule.addToCart(this.props.cartItem)}>+</button>
+            <button onClick={() => this.props.addToCart(this.props.cartItem)}>+</button>
             <MyInput value={this.props.cartItem.amount} min={1} max={this.props.cartItem.rest} onChange={this.chp} />
-            <button onClick={() => cartModule.removeFromCart(this.props.cartItem)}>{this.props.cartItem.amount === 1 ? <i className="fa fa-trash" aria-hidden="true"></i> : "-"}</button>
+            <button onClick={() => this.props.removeFromCart(this.props.cartItem)}>{this.props.cartItem.amount === 1 ? <i className="fa fa-trash" aria-hidden="true"></i> : "-"}</button>
           </td>
         </tr>
       );
