@@ -5,7 +5,7 @@ const HTML = require('html-webpack-plugin')
 
 let conf = {
   context: path.resolve(__dirname, 'src'),
-  entry: './main.js',
+  entry: ['regenerator-runtime/runtime.js', './main.js'],
   output: {
     path: path.resolve(__dirname, './dist/'),
     filename: 'main.js',
@@ -115,6 +115,9 @@ let conf = {
     contentBase: path.join(__dirname, 'dist'),
     historyApiFallback: true,
     overlay: true,
+    proxy: {
+      '/api': `http://localhost:${process.env.NODE_PORT || 3000}`,
+    },
   },
 
   plugins: [

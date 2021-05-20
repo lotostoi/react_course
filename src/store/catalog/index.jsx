@@ -1,7 +1,8 @@
-import React from "react";
-import { observable, action, computed, makeObservable } from "mobx";
-import { products } from "./data";
-import { getRndFromArray } from "f";
+
+import { observable, action, computed, makeObservable } from 'mobx'
+import { getRndFromArray } from 'f'
+
+import * as catalogApi from '@/api/catalog'
 
 class Catalog {
   constructor(root) {
@@ -10,48 +11,48 @@ class Catalog {
       getProducts: computed,
       getFeaturedProducts: computed,
       totalSum: computed,
-      changeProducts: action,
-      delProd: action,
-    });
-
+      setProducts: action,
+    })
     this.rootStore = root
-
   }
 
-  products = products();
+  products = []
 
   get getProducts() {
-    return this.products;
+    return this.products
   }
 
   get getFeaturedProducts() {
     return (amount) => {
+      if (!this.products.length) return []
       if (amount > this.products.length - 1) {
-        amount = this.products.length - 1;
+        amount = this.products.length - 1
         try {
-          throw new Error("Amount > product's amount");
+          throw new Error("Amount > product's amount")
         } catch (e) {
-          console.error(e);
+          console.error(e)
         }
       }
-      return getRndFromArray(amount, this.products);
-    };
+      return getRndFromArray(amount, this.products)
+    }
   }
 
   get totalSum() {
-    return this.cartProducts.reduce((t, { price, amount }) => t + price * amount, 0);
+    return this.cartProducts.reduce((t, { price, amount }) => t + price * amount, 0)
   }
 
-  changeProducts = (e, _id) => {
-    const newProd = this.cartProducts.find(({ id }) => +id === +_id) || {};
-    if ("id" in newProd) {
-      newProd.amount = e;
+  async setProducts() {
+    try {
+      const goods = await catalogApi.all()
+      this.products = goods.map((good) => {
+        good.id = good._id
+        good.img = good.img.map((img) => require(`@/assets/img/${img}`))
+        return good
+      })
+    } catch (e) {
+      console.log(e)
     }
-  };
-
-  delProd = (_id) => {
-    this.cartProducts = this.cartProducts.filter(({ id }) => +id !== _id);
-  };
+  }
 }
 
-export default Catalog;
+export default Catalog

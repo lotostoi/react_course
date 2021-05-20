@@ -7,6 +7,9 @@ class RootStore {
         this.catalog = new Catalog(this)
     }
 }
+ const store = new RootStore()
 
+ store.catalog.setProducts()
+ store.cart.setCartProducts()
 
-export default new RootStore()
+export default store
