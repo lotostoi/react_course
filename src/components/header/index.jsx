@@ -11,8 +11,8 @@ reaction(
   () => store.cart.totalSum,
   (val, prevVal, reaction) => {
     const cart = document.querySelector(`.${style.header__cart}`);
-    cart.classList.add(`${style.jump}`);
-    setTimeout(() => cart.classList.remove(`${style.jump}`), 300);
+    cart.classList.add(`animate__shakeX`);
+    setTimeout(() => cart.classList.remove(`animate__shakeX`), 300);
   }
 );
 
@@ -40,7 +40,7 @@ export default injectObserver(({ store }) => {
             <i className="fa fa-search" aria-hidden="true"></i>
           </button>
         </div>
-        <NavLink exact strict className={style.header__cart} to={routesMap("cart")} activeClassName={style.active}>
+        <NavLink exact strict className={style.header__cart+ " animate__animated"} to={routesMap("cart")} activeClassName={style.active}>
           <span>{store.cart.totalAmount} pcs.</span>
           <img src={require("@/assets/img/cart.svg")} alt="cart" />
           <span>${store.cart.totalSum}</span>

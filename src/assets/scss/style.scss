@@ -5,6 +5,10 @@ $pinkHover: #e7bdc3;
 $pinkActive: #9e2d3e;
 $base: #222222;
 
+a {
+  text-decoration: none !important;
+}
+
 .rel {
   margin-top: 120px;
   position: relative;

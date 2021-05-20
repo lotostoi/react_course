@@ -147,7 +147,7 @@
       }
     }
     &__cart.active {
-      background-color: rgba(128, 128, 128, 0.459);
+      background-color: lighten($pinkActive, 50%);
     }
   }
   @include mq(788, max) {
