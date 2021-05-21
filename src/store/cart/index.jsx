@@ -55,20 +55,19 @@ class Cart {
       if (newItem) {
         await cartApi.change({ id: newItem.id, amount: newItem.amount + 1 })
         runInAction(() => {
-          this.rootStore.catalog.isDisabledOff(item.id)
           newItem.amount !== item.rest && newItem.amount++
         })
       } else {
         await cartApi.add({ ...item, amount: 1 })
         runInAction(() => {
-          this.rootStore.catalog.isDisabledOff(item.id)
+         
           this.cartProducts.push({ ...item, amount: 1 })
         })
       }
     } catch (e) {
       console.log(e)
-      this.rootStore.catalog.isDisabledOff(item.id)
     }
+    this.rootStore.catalog.isDisabledOff(item.id)
   }
 
   removeFromCart = async (item) => {
@@ -89,7 +88,6 @@ class Cart {
     } catch (e) {
       console.log(e)
     }
-    console.log(id)
     this.rootStore.catalog.isDisabledOff(id)
   }
 

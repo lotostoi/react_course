@@ -1,0 +1,21 @@
+.add-remove-enter {
+    opacity: 0;
+    transform: scale(0);
+}
+.add-remove-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+.add-remove-exit {
+    opacity: 1;
+}
+.add-remove-exit-active {
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.add-remove-color {
+    background-color: red!important;
+}   

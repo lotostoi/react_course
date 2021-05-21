@@ -9,7 +9,7 @@ export default injectObserver(
   class extends React.Component {
     render() {
       const { store } = this.props
-      const goods = store.catalog.getProducts.map((good) => {
+      const goods = store.catalog.filteredProducts.map((good) => {
         return (
           <Good
             good={good}

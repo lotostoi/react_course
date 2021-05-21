@@ -1,18 +1,30 @@
-import React from "react";
-import CartItem from "./cartItem";
-import style from "./style.module.scss";
-import injectObserver from "c/hoc/inject-observ";
+import React from 'react';
+import CartItem from 'c/cart/cartItem';
+import style from './style.module.scss';
+import './anim.scss';
+import injectObserver from 'c/hoc/inject-observ';
 
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
-export default injectObserver(
+export default injectObserver (
   class extends React.PureComponent {
-    render() {
-      const { cart } = this.props.store;
-      const totalSum = cart.cartProducts.reduce((total, { price, amount }) => total + price * amount, 0);
-      const cartItems = cart.cartProducts.map((item) => (
+    render () {
+      const {cart, catalog} = this.props.store;
+      const totalSum = cart.cartProducts.reduce (
+        (total, {price, amount}) => total + price * amount,
+        0
+      );
+      const cartItems = cart.cartProducts.map (item => (
         <CSSTransition key={item.id} timeout={500} classNames="item">
-          <CartItem changeProducts={cart.changeProducts} addToCart={cart.addToCart} removeFromCart={cart.removeFromCart} cartItem={item} style={style} key={item.id} />
+          <CartItem
+            changeProducts={cart.changeProducts}
+            addToCart={cart.addToCart}
+            removeFromCart={cart.removeFromCart}
+            cartItem={item}
+            style={style}
+            key={item.id}
+            isDisabled={catalog.getById (item.id)?.isDisabled}
+          />
         </CSSTransition>
       ));
       return (
@@ -43,15 +55,30 @@ export default injectObserver(
                   <option value="Moscow">Moscow</option>
                   <option value="Vladivostok">Vladivostok</option>
                 </select>
-                <input type="text" name="state" className={style.state} placeholder="State" />
-                <input type="text" name="state" className={style.state} placeholder="Postcode/Zip" />
+                <input
+                  type="text"
+                  name="state"
+                  className={style.state}
+                  placeholder="State"
+                />
+                <input
+                  type="text"
+                  name="state"
+                  className={style.state}
+                  placeholder="Postcode/Zip"
+                />
                 <button type="submit">Get a quote</button>
               </form>
               <form className={style.coupon}>
                 <h4>Coupon discount</h4>
 
                 <label>Enter your coupon code if you have one</label>
-                <input type="text" name="state" className={style.state} placeholder="State" />
+                <input
+                  type="text"
+                  name="state"
+                  className={style.state}
+                  placeholder="State"
+                />
                 <button type="submit">Apply coupon</button>
               </form>
               <div>
@@ -61,8 +88,11 @@ export default injectObserver(
                 <h4>
                   GRAND TOTAL <span>${totalSum}</span>
                 </h4>
-                <div></div>
-                <button onClick={() => Router.toPage("orders")} className={style.checkout}>
+                <div />
+                <button
+                  onClick={() => Router.toPage ('orders')}
+                  className={style.checkout}
+                >
                   Proceed to checkout
                 </button>
               </div>
