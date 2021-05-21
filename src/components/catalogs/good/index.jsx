@@ -28,7 +28,7 @@ function good(props) {
           />
         </div>
       </div>
-      <HashLink to={`/catalog-list/${props.good.id}#single`}>{props.good.title}</HashLink>
+      <HashLink to={`/catalog-list/${props.good.id}`}>{props.good.title}</HashLink>
       <span>$ {props.good.price} </span>
     </div>
   )

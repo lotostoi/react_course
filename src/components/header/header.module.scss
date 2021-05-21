@@ -1,9 +1,7 @@
 @import '@/assets/scss/style';
 
 .jump {
-  transform: translateY(-20px);
-  color: white;
-  background-color: $pink!important;
+  border:2px solid lighten($pink, 20%)!important;
 }
 
 .header {
@@ -100,13 +98,12 @@
         }
       }
       & > button {
-        box-sizing: content-box;
         height: 100%;
         display: flex;
         border: 1px solid #e6e6e6;
         border-radius: 0 5px 5px 0;
         background-color: transparent;
-        outline: none;
+        outline: none!important;
         border-left: none;
         align-items: center;
         justify-content: center;
@@ -131,13 +128,14 @@
       padding: 0 5px;
       border-radius: 3px;
       align-items: center;
-      text-decoration: none;
-      color: $base;
+      text-decoration: none!important;
+      color: $base!important;
       border: 1px solid rgba(128, 128, 128, 0.144);
       transition: transform 300ms;
       & > span {
         display: flex;
         margin-left: 5px;
+
       }
       &:hover {
         background-color: lighten($pinkActive, 50%);
