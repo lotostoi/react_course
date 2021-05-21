@@ -5,13 +5,13 @@ export function getRandom(min, max) {
 }
 
 export function getRndFromArray (amount, products) {
-    const rundomGoods = [];
-    while (rundomGoods.length < amount) {
+    const randomGoods = [];
+    while (randomGoods.length < amount) {
         const rndGood = products[getRandom(0, products.length - 1)];
-        const good = rundomGoods.find((g) => +g.id === +rndGood.id);
+        const good = randomGoods.find((g) => g.id.toString() === rndGood.id.toString());
         if (!good) {
-            rundomGoods.push(rndGood);
+            randomGoods.push(rndGood);
         }
     }
-    return rundomGoods;
+    return randomGoods;
 }

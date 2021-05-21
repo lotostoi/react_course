@@ -32,7 +32,7 @@ body {
 }
 .item-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 .item-exit {
   opacity: 1;
@@ -40,5 +40,26 @@ body {
 .item-exit-active {
   opacity: 0;
   transform: scale(0);
-  transition: opacity 500ms ease-in, transform 500ms ease-in;
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.fade-enter .my-btn {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.fade-enter-active .my-btn {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.fade-exit .my-btn {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.fade-exit-active .my-btn {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.fade-enter-active .my-btn,
+.fade-exit-active .my-btn {
+  transition: opacity 500ms, transform 500ms;
 }
