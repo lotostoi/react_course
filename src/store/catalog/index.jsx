@@ -1,7 +1,7 @@
 import {observable, action, computed, makeObservable, runInAction} from 'mobx';
 import {getRndFromArray} from 'f';
 
-import * as catalogApi from '@/api/catalog';
+
 
 class Catalog {
   constructor (root) {
@@ -89,7 +89,7 @@ class Catalog {
 
   async setProducts () {
     try {
-      const goods = await catalogApi.all ();
+      const goods = await this.rootStore.api.catalog.all ();
       runInAction (() => {
         this.products = goods.map (good => {
           good.id = good._id;

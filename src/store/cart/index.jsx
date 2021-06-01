@@ -1,5 +1,5 @@
 import { observable, action, computed, makeObservable, runInAction } from 'mobx'
-import * as cartApi from '@/api/cart'
+
 
 class Cart {
   constructor(root) {
@@ -38,7 +38,7 @@ class Cart {
     const newProd = this.cartProducts.find(({ id }) => id.toString() === _id.toString()) || {}
     if ('id' in newProd) {
       try {
-        await cartApi.change({ id: _id, amount: e })
+        await this.rootStore.api.cart.change({ id: _id, amount: e })
         newProd.amount = e
       } catch (e) {
         console.log(e)
@@ -53,12 +53,12 @@ class Cart {
     try {
       const newItem = this.cartProducts.find(({ id }) => id.toString() === item.id.toString())
       if (newItem) {
-        await cartApi.change({ id: newItem.id, amount: newItem.amount + 1 })
+        await this.rootStore.api.cart.change({ id: newItem.id, amount: newItem.amount + 1 })
         runInAction(() => {
           newItem.amount !== item.rest && newItem.amount++
         })
       } else {
-        await cartApi.add({ ...item, amount: 1 })
+        await this.rootStore.api.cart.add({ ...item, amount: 1 })
         runInAction(() => {
          
           this.cartProducts.push({ ...item, amount: 1 })
@@ -75,12 +75,12 @@ class Cart {
     this.rootStore.catalog.isDisabledOn(id)
     try {
       if (item.amount > 1) {
-        await cartApi.change({ id: item.id, amount: item.amount - 1 })
+        await this.rootStore.api.cart.change({ id: item.id, amount: item.amount - 1 })
         runInAction(() => {
           item.amount--
         })
       } else {
-        await cartApi.del(item.id)
+        await this.rootStore.api.cart.del(item.id)
         runInAction(() => {
           this.delProd(item.id)
         })
@@ -97,7 +97,7 @@ class Cart {
 
   async setCartProducts() {
     try {
-      const cart = await cartApi.all()
+      const cart = await this.rootStore.api.cart.all()
       runInAction(() => {
         this.cartProducts = cart
       })
