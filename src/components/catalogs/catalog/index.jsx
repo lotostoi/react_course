@@ -47,7 +47,7 @@ export default injectObserver(
                   : null)
               }
             >
-              {goods}
+             {goods} *
             </div>
           </section>
         </>

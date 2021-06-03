@@ -210,6 +210,7 @@
       color: white;
       justify-content: center;
       transition: background-color 0.3s;
+      text-transform: uppercase;
       &:hover {
         cursor: pointer;
         background-color: $pink;
@@ -224,6 +225,8 @@
 @include mq(680, max) {
   .header {
     justify-content: center;
+    padding: 20px;
+    align-items: center;
     &__nav {
       background-color: rgb(121, 87, 87);
       position: absolute;
@@ -242,8 +245,10 @@
       transform: scaleY(1);
     }
     &__search {
-      order: 2;
-      margin: 10px auto;
+      order: 8;
+      width: 100%;
+      margin: 20px auto 10px;
+      justify-content: center;
       & > .browse {
         display: none;
       }
@@ -266,18 +271,20 @@
     padding: 20px;
     &__logo {
       width: auto;
-      order: 1;
+      order: 0;
+      display: none;
     }
     &__search {
-      order: 4;
+      order: 8;
       margin: 10px auto;
     }
     &__cart {
+      order: 7;
       margin: 10px 0 10px auto;
     }
-    &__myAccount {
+    &__myAccount  {
       margin: 10px auto;
-      order: 3;
+      order: 1;
     }
   }
 }

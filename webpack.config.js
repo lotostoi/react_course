@@ -57,6 +57,14 @@ let conf = {
             },
           },
           'sass-loader',
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [
+                path.resolve(__dirname, 'src/assets/scss/style.scss'),
+              ]
+            },
+          },
         ],
       },
       {
@@ -106,7 +114,7 @@ let conf = {
           },
         ],
       },
-    ],
+    ]
   },
 
   devtool: process.env.NODE_ENV !== 'development' ? false : 'eval-cheap-module-source-map',

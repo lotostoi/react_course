@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Cart from '@/components/cart/cart'
+import Cart from 'p/cart'
 import Home from 'p/home'
 import Catalog from 'p/catalog'
 import Orders from '@/components/orders'
 import ErrorPage from 'p/error'
 import SinglePage from 'p/singlePage'
 import { CSSTransition } from 'react-transition-group'
-import './router.css'
+import './router.scss'
 
 const routesArray = [
   {
@@ -70,7 +70,7 @@ export let error = (_path) => {
 export const routes = routesArray.map((rout) => (
   <Route exact={rout.exact} strict={rout.strict} key={rout.path} path={rout.path}>
     {({ match }) => (
-      <CSSTransition in={match != null} timeout={300} classNames='page' unmountOnExit>
+      <CSSTransition in={match != null} timeout={300} classNames="page" unmountOnExit>
         <rout.component match={match} />
       </CSSTransition>
     )}

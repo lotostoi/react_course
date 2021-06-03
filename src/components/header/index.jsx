@@ -46,7 +46,7 @@ export default injectObserver(({ store }) => {
             BRSN<span>D</span>
           </p>
         </NavLink>
-        <nav className={style.header__nav + (!showMenu ? " " + style.header__active : ' ')}>
+        <nav className={style.header__nav + (showMenu ? " " + style.header__active : ' ')}>
           <NavLink exact strict to={routesMap('home')} activeClassName={style.active}>
             Main
           </NavLink>

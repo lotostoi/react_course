@@ -1,4 +1,4 @@
-@import '@/assets/scss/style.scss';
+
 .category {
   margin-top: 96px;
   display: flex;
@@ -24,7 +24,7 @@
         text-decoration: none;
         margin-bottom: 20px;
         &:before {
-          content: "";
+          content: '';
           display: flex;
           position: absolute;
           width: 100%;
@@ -33,7 +33,7 @@
           box-sizing: content-box;
         }
         &:hover:before {
-          content: "";
+          content: '';
           display: flex;
           position: absolute;
           background-color: rgba(128, 128, 128, 0.692);
@@ -88,7 +88,7 @@
         //  margin-right: 0;
         & > a {
           &:before {
-            content: "";
+            content: '';
             display: none;
             position: absolute;
             width: 100%;
@@ -117,7 +117,7 @@
         margin-right: 0;
         & > a {
           &:before {
-            content: "";
+            content: '';
             display: none;
             position: absolute;
             width: 100%;
@@ -126,7 +126,7 @@
             box-sizing: content-box;
           }
           &:hover:before {
-            content: "";
+            content: '';
             display: none;
             position: absolute;
             background-color: rgba(128, 128, 128, 0.692);
@@ -154,7 +154,7 @@
       & > .right {
         & > a {
           &:before {
-            content: "";
+            content: '';
             display: none;
             position: absolute;
             width: 100%;

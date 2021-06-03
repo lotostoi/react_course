@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "set NODE_ENV=development  && set NODE_PORT=3000 && webpack-dev-server --mode development --open",
-    "build": "set NODE_PORT=3000 && webpack --mode production",
-    "server-dev": "set NODE_ENV=development && set NODE_PORT=3000 && nodemon server"
+    "dev": "set NODE_ENV=development&& set NODE_PORT=3000&& webpack-dev-server --mode development --open",
+    "build": "set NODE_PORT=3000&& webpack --mode production",
+    "server-dev": "set NODE_ENV=development&& set NODE_PORT=3000&& nodemon server"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +39,8 @@
     "regenerator-runtime": "^0.13.7",
     "request": "^2.79.0",
     "sass-loader": "^7.0.1",
+    "sass-resources-loader": "^2.2.1",
+    "style-loader": "^2.0.0",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
